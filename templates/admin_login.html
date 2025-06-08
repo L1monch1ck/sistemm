@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Вход в админ-панель{% endblock %}
+{% block content %}
+    <h1 class="text-4xl font-bold text-blue-800 mb-8 text-center">Вход в админ-панель</h1>
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md mx-auto">
+        <form method="POST" class="space-y-6">
+            <div style="margin: 0 0 0 20px;">
+                <label for="password" class="text-lg text-blue-800">Пароль</label>
+                <input type="password" name="password" id="password" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            {% if error %}
+            <p class="text-red-500 text-center">{{ error }}</p>
+            {% endif %}
+            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-all duration-300 w-full" style="margin: 10px 0 15px 20px;">Войти</button>
+        </form>
+    </div>
+{% endblock %}

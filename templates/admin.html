@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Админ-панель{% endblock %}
+{% block content %}
+    <h1 class="text-4xl font-bold text-blue-800 mb-8 text-center" style="font-size: 32px;">Админ-панель</h1>
+    <div class="bg-white p-8 rounded-lg shadow-lg mb-8" style="border-radius: 5px; width: 1250px;">
+        <h2 class="text-2xl font-semibold text-blue-800 mb-6" style="font-size: 20px; color:#4B5563;">Создать новое голосование</h2>
+        <form method="POST" class="space-y-6" style="margin: 0 0 0 20px;">
+            <div>
+                <label for="question" class="text-lg text-blue-800">Вопрос</label>
+                <input type="text" name="question" id="question" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div id="options" class="space-y-4">
+                <input type="text" name="options" placeholder="Вариант 1" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                <input type="text" name="options" placeholder="Вариант 2" class="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="button" onclick="addOption()" class="bg-gray-300 text-blue-800 px-4 py-2 rounded hover:bg-gray-400 transition-all duration-300" style="margin: 10px 10px 10px 0;">Добавить вариант</button>
+            <button type="submit" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-all duration-300 w-full">Создать</button>
+        </form>
+    </div>
+    <h2 class="text-2xl font-semibold text-blue-800 mb-6 text-center">Существующие голосования</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style="margin-bottom: 25px;">
+        {% for poll in polls %}
+        <div class="card" >
+            <h3 class="text-xl font-semibold text-blue-700 mb-4">{{ poll.question }}</h3>
+            <form method="POST" action="{{ url_for('delete_poll', poll_id=poll.id) }}">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-all duration-300">Удалить</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mt-8">
+        <a href="{{ url_for('logout') }}" class="bg-gray-300 text-blue-800 px-6 py-3 rounded-full hover:bg-gray-400 transition-all duration-300" style="margin-top:-30px ;">Выйти</a>
+    </div>
+{% endblock %}

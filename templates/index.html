@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+
+    <h1 class="text-4xl font-bold text-blue-800 mb-8 text-center">Активные голосования</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for poll in polls %}
+        <div class="card">
+            <h3 class="text-xl font-semibold text-blue-700 mb-4">{{ poll.question }}</h3>
+            <a href="{{ url_for('poll', poll_id=poll.id) }}" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-all duration-300">Голосовать</a>
+        </div>
+        {% endfor %}
+    </div>
+    
+{% endblock %}
